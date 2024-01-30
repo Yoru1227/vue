@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+    <style>
+      .templateInput {
+        width: 50px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【監聽器基本寫法】</h3>
+      <section>
+        <div>
+          今天氣溫：<input
+            class="templateInput"
+            type="number"
+            v-model.number.lazy="temperature"
+          />
+        </div>
+        <div>今天天氣{{info}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【監聽器完整寫法】</h3>
+      <section>
+        <div>姓名:{{personalInfo.name}}</div>
+        <div>年齡:{{personalInfo.age}}</div>
+        <div>興趣:{{personalInfo.hobby}}</div>
+        <div>修改姓名：<input type="text" v-model="personalInfo.name" /></div>
+        <div>
+          增加興趣：<input type="text" v-model="newHobby" /><button
+            @click="personalInfo.hobby.push(newHobby)"
+          >
+            增加
+          </button>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      window.app = createApp({
+        data() {
+          return {
+            temperature: 22,
+            personalInfo: {
+              name: "Amy",
+              age: 25,
+              hobby: ["吃飯", "睡覺", "打東東"],
+            },
+            newHobby: "",
+          };
+        },
+        computed: {
+          info() {
+            if (this.temperature > 50 || this.temperature < -10) {
+              return "世界末日!";
+            }
+            if (this.temperature > 28) {
+              return "很熱";
+            }
+            if (this.temperature < 18) {
+              return "很冷";
+            }
+            return "宜人";
+          },
+        },
+        watch: {
+          /*
+          ==================================================
+          【基本寫法】直接寫成函數，可監控新、舊值差異
+          ==================================================
+          */
+          // temperature(newVal, oldVal) {
+          //   const tempDifference = newVal - oldVal;
+          //   const action = tempDifference > 0 ? "提升" : "降低";
+          //   console.log(
+          //     `氣溫從${oldVal}${action}${Math.abs(
+          //       tempDifference
+          //     )}度，現在是${newVal}度。`
+          //   );
+          // },
+
+          /*
+          ==================================================
+          【也可監視計算屬性】
+          ==================================================
+          */
+
+          // info(newVal,oldVal){
+          //   console.log(`天氣從${oldVal}變成了${newVal}!`)
+          // }
+
+          /*
+          ==================================================
+          【完整寫法】寫成物件，可額外做immediate、deep的設定
+          ==================================================
+          */
+          personalInfo: {
+            handler(newVal, oldVal) {
+              console.log(
+                "個人資訊發生了變化!",
+                `舊值:${oldVal.name}`,
+                `新值:${newVal.name}`
+              );
+            },
+            // deep: true, // 目標物件發生變化時，Vue並不會對目標物件創建一個深度拷貝物件來作為oldVal(因拷貝一份可能會有效能問題)
+            // immediate:true
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>Count: {{ count }}</div>
+      <div>
+        <button @click="increase">+</button>
+        <button @click="decrease">-</button>
+      </div>
+    </div>
+
+    <script type="module">
+      /*
+      ==================================================
+      【選項式風格 Option API】
+      ==================================================
+      */
+      // import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      // createApp({
+      //   data() {
+      //     return { count: 1 };
+      //   },
+      //   methods: {
+      //     increase() {
+      //       this.count += 1;
+      //     },
+      //     decrease() {
+      //       this.count -= 1;
+      //     },
+      //   },
+      // }).mount("#app");
+
+      /*
+      ==================================================
+      【組合式風格 Composition API】
+      ==================================================
+      */
+
+      // import {
+      //   createApp,
+      //   ref,
+      // } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      // createApp({
+      //   setup() {
+      //     const count = ref(1);
+
+      //     function increase() {
+      //       count.value += 1;
+      //     }
+
+      //     function decrease() {
+      //       count.value -= 1;
+      //     }
+
+      //     return { count, increase, decrease };
+      //   },
+      // }).mount("#app");
+    </script>
+  </body>
+</html>

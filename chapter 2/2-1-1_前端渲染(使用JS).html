@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/asset/common/axios_1.6.5.min.js"></script>
+    <link rel="stylesheet" href="/asset/common/bootstrap_5.3.2.min.css" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <header data-bs-theme="dark">
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid ms-3">
+          <div class="navbar-brand d-flex align-items-center">nono購物網</div>
+        </div>
+      </div>
+    </header>
+    <div class="row m-2" id="product_home"></div>
+    <script>
+      /*
+      ==================================================
+      【瀏覽器取得此html後，即會執行以下JavaScript程式碼】
+      ==================================================
+      */
+      // const productHome = document.querySelector("#product_home");
+
+      // axios.get("/asset/2-1/product.json").then((rs) => {
+      //   const products = rs.data;
+
+      //   let output = "<ul>";
+      //   products.forEach((p) => {
+      //     output += `<li class='m-2'>${p.id}, ${p.name}, ${p.price}, <img src='${p.photo_path}' style='width:100px'></li>`;
+      //   });
+
+      //   output += "</ul>";
+      //   productHome.innerHTML = output;
+      // });
+
+      /*
+      ==================================================
+      【若把「取得資料」與「渲染資料」的邏輯與程式混在一起寫，對開發不利】
+      ==================================================
+      */
+
+      // const productHome = document.querySelector("#product_home");
+
+      // axios.get("/asset/2-1/product.json").then((rs) => {
+      //   const products = rs.data;
+
+      //   let output = "";
+      //   products.forEach((p) => {
+      //     output += `<div class="card m-1 align-items-center" style="width: 18rem">`;
+      //     output += `<img src="${p.photo_path}" class="card-img-top" style='width:200px'/>`;
+      //     output += `<div class="card-body">`;
+      //     output += `<p class="card-text text-center">${p.name}, ${p.price}元</p>`;
+      //     output += `</div></div>`;
+      //   });
+
+      //   productHome.innerHTML = output;
+      // });
+    </script>
+  </body>
+</html>

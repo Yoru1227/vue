@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div @mouseover="changeMessage">{{message}}</div>
+      <div>count:{{count}} <button @click="increase">點我加一</button></div>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return { message: "Hello Vue!", count: 1 };
+        },
+        /*
+        ==================================================
+        【注意methods是"物件"，裡面定義"函數"】
+        ==================================================
+        */
+        methods: {
+          increase() {
+            this.count++;
+          },
+          changeMessage() {
+            this.message = "哈囉，Vue!";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

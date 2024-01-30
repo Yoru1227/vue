@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+    <link rel="stylesheet" href="/asset/common/bootstrap_5.3.2.min.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container-fluid">
+        <h3 class="text-center m-4">【基本computed用法】</h3>
+        <section>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div>
+                <input
+                  type="text"
+                  class="form-control mb-4"
+                  placeholder="輸入關鍵字搜尋商品"
+                  v-model="searchKeyWord"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h4 class="text-center">[商品清單]</h4>
+              <div>
+                <table class="table text-center align-middle">
+                  <thead>
+                    <tr>
+                      <td>名稱</td>
+                      <td>價格</td>
+                      <td>圖片</td>
+                      <td>加入購物車</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="p in filterProducts">
+                      <td>{{p.name}}</td>
+                      <td>{{p.price}}</td>
+                      <td>
+                        <img :src="p.photo_path" style="width: 100px" />
+                      </td>
+                      <td>
+                        <button @click="addToCart(p)">加入商品</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="text-center">[購物車]:{{total}}元</h4>
+              <table class="table text-center align-middle">
+                <thead>
+                  <tr>
+                    <td>名稱</td>
+                    <td>價格</td>
+                    <td>圖片</td>
+                    <td>移除購物車</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="p in shoppingCart">
+                    <td>{{p.name}}</td>
+                    <td>{{p.price}}</td>
+                    <td>
+                      <img :src="p.photo_path" style="width: 100px" />
+                    </td>
+                    <td>
+                      <button @click="removeFromCart(p)">移除商品</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            products: [
+              {
+                id: "P001",
+                name: "深色襯衫",
+                price: 2500,
+                photo_path: "/asset/2-3-4/shirt.jpg",
+              },
+              {
+                id: "P002",
+                name: "深色牛仔褲",
+                price: 1800,
+                photo_path: "/asset/2-3-4/jeans.jpg",
+              },
+              {
+                id: "P003",
+                name: "淺色t-shirt",
+                price: 1000,
+                photo_path: "/asset/2-3-4/t-shirt.jpg",
+              },
+              {
+                id: "P004",
+                name: "淺色外套",
+                price: 4000,
+                photo_path: "/asset/2-3-4/coat.jpg",
+              },
+              {
+                id: "P005",
+                name: "淺色拖鞋",
+                price: 300,
+                photo_path: "/asset/2-3-4/slipper.jpg",
+              },
+            ],
+            shoppingCart: [],
+            // total: 0,
+            searchKeyWord: "",
+          };
+        },
+        methods: {
+          addToCart(product) {
+            this.shoppingCart.push(product);
+          },
+          removeFromCart(product) {
+            this.shoppingCart.splice(this.shoppingCart.indexOf(product), 1);
+          },
+          calculateTotal() {
+            this.total = this.shoppingCart.reduce((sum, p) => sum + p.price, 0);
+
+            // let sum = 0;
+            // this.shoppingCart.forEach((p) => (sum += p.price));
+            // this.total = sum;
+          },
+        },
+
+        computed: {
+          /*
+          ==================================================
+          【改寫此處】
+          ==================================================
+          */
+          total()
+          {
+            let sum = 0;
+            for(let p of this.shoppingCart){
+              sum += p.price;
+            }
+            return sum;
+          },
+          filterProducts() 
+          {
+            return this.products.filter(p=>p.name.match(this.searchKeyWord));
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

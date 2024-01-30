@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li>1500</li>
+      <li>13000</li>
+      <li>2800</li>
+      <li>5</li>
+      <li>1770</li>
+      <li>14000</li>
+      <li>18000</li>
+    </ul>
+
+    <script>
+      /*
+      ==================================================
+      【樣板字串】
+      ==================================================
+      */
+
+      // let name = "Amy";
+      // console.log("Hello, my name is " + name + ", nice to meet you.");
+
+      /*
+      ==================================================
+      【語法糖】
+      ==================================================
+      */
+
+      // const someone = {
+      //   name: "Amy",
+      //   sayHi() {
+      //     console.log(`Hi! this is ${this.name}`);
+      //   },
+      // };
+      // const home = {
+      //   someone,
+      // };
+
+      /*
+      ==================================================
+      【展開運算子-陣列】
+      ==================================================
+      */
+
+      // const aArr = ["A", "B", "C"];
+
+      // const bArr = ["D", "E", "F"];
+
+      // aArr.concat(bArr);
+      // console.log(allArr);
+
+      /*
+      ==================================================
+      【展開運算子-物件】
+      ==================================================
+      */
+
+      const origin = {
+        name: "Amy",
+        age: 20,
+        items: ["apple", "pen", "apple pen"],
+      };
+
+      let copycat = {...origin};
+
+      for (let key in origin) {
+        copycat[key] = origin[key];
+      }
+
+      /*
+      ==================================================
+      【展開運算子-NodeList】
+      ==================================================
+      */
+
+      // const ageNodes = document.querySelectorAll("li");
+
+      // let over9000 = [];
+
+      // for (let item of ageNodes) {
+      //   if (item.innerHTML > 9000) {
+      //     over9000.push(item.innerHTML);
+      //   }
+      // }
+
+      // console.log(over9000);
+
+      // let over9000 = [...priceNodes]
+      // .filter((item) => item.innerHTML > 9000)
+      // .map((item) => item.innerHTML);
+    </script>
+  </body>
+</html>

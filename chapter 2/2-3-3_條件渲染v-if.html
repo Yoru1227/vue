@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【v-if】</h3>
+      <section>
+        <div><button @click="amyMove">Amy Move!</button></div>
+        <h1 v-if="isAmyHere">Amy 在這邊</h1>
+        <h1 v-if="!isAmyHere">Amy 不在這邊</h1>
+      </section>
+
+      <hr />
+
+      <h3>【v-show】</h3>
+      <section>
+        <div><button @click="amyMove">Amy Move!</button></div>
+        <h1 v-show="isAmyHere">Amy 在這邊</h1>
+        <h1 v-show="!isAmyHere">Amy 不在這邊</h1>
+      </section>
+
+      <hr />
+
+      <h3>【v-else-if】</h3>
+      <section>
+      <h4>where is bob:{{bobIsAt}}</h4>
+      <div><button @click="bobMove">Bob Move!</button></div>
+
+      <h1 v-if="bobIsAt=='school'">Bob在學校</h1>
+      <h1 v-else-if="bobIsAt=='home'">Bob在家裡</h1>
+      <h1 v-else>Bob在公司</h1>
+
+      <h1 v-if="bobIsAt=='school'">Bob在學校</h1>
+      <h1 v-if="bobIsAt=='home'">Bob在家裡</h1>
+      <h1 v-if="bobIsAt=='company'">Bob在公司</h1>
+      </section>
+
+      <hr />
+
+      <h3>【v-if 與 v-for 搭配】</h3>
+      <section>
+        <ul>
+        <!-- 這是錯誤的寫法 -->
+        <!-- <li v-for="p in products" :key="p.id" v-if="p.price>18000">
+          {{p.name}}, {{p.price}}
+        </li> -->
+
+        <!-- 使用template與v-if結合 -->
+        <!-- <template v-for="p in products" :key="p.id">
+          <li v-if="p.price>18000">{{p.name}}, {{p.price}}</li>
+        </template> -->
+
+        <!-- 使用計算屬性(computed)(推薦) -->
+        <!-- <li v-for="p in productsOver18000" :key="p.id">{{p.name}}, {{p.price}}</li> -->
+        </ul>
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            isAmyHere: true,
+            bobIsAt: "school",
+            products: [
+              {
+                id: "P01",
+                name: "手機",
+                price: 20000,
+              },
+              {
+                id: "P02",
+                name: "筆電",
+                price: 35000,
+              },
+              {
+                id: "P01",
+                name: "電視",
+                price: 15000,
+              },
+            ],
+          };
+        },
+        methods: {
+          amyMove() {
+            this.isAmyHere = !this.isAmyHere;
+          },
+          bobMove() {
+            if (this.bobIsAt == "school") {
+              this.bobIsAt = "home";
+            } else if (this.bobIsAt == "home") {
+              this.bobIsAt = "company";
+            } else {
+              this.bobIsAt = "school";
+            }
+          },
+        },
+        computed: {
+          productsOver18000() {
+            return this.products.filter((p) => p.price > 18000);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

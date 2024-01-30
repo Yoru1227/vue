@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【v-text:內文將作為純文本渲染，且會取代原始內文】</h3>
+      <section>
+        <div v-text="rawHtml">這裡面原本有些東西</div>
+      </section>
+
+      <hr />
+
+      <h3>【v-html:內文將作為HTML渲染，也會取代原始內文】</h3>
+      <section>
+        <div v-html="rawHtml"></div>
+      </section>
+
+      <hr />
+
+      <h3>【v-pre:內文不會被vue解析編譯】</h3>
+      <section>
+        <div v-pre>{{這裡完全不會被編譯，插值語法會失效}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【v-once:只渲染一次，之後不再更新】</h3>
+      <button @click="changeRawHtml">change</button>
+      <section>
+        <div v-once>{{rawHtml}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【插值語法:最常使用的方式，有多種應用】</h3>
+      <!-- <section>
+        <div>我叫做Bob, 今年30歲。</div>
+        <div>可以在雙括弧裡面使用表達式:{{}}</div>
+        <div>也可以在雙括弧快速查看資料:{{}}</div>
+      </section> -->
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            name: "Amy",
+            age: 18,
+            rawHtml: "<h1 style='color:red'>哈囉Vue!</h1>",
+            products: [
+              {
+                id: "P001",
+                name: "手機",
+                price: 20000,
+                photo_path: "/asset/2-1/phone.jpg",
+              },
+              {
+                id: "P002",
+                name: "手錶",
+                price: 8000,
+                photo_path: "/asset/2-1/watch.jpg",
+              },
+              {
+                id: "P003",
+                name: "電視",
+                price: 15000,
+                photo_path: "/asset/2-1/television.jpg",
+              },
+              {
+                id: "P004",
+                name: "主機",
+                price: 40000,
+                photo_path: "/asset/2-1/computer.jpg",
+              },
+              {
+                id: "P005",
+                name: "筆電",
+                price: 35000,
+                photo_path: "/asset/2-1/notebook.jpg",
+              },
+            ],
+          };
+        },
+        methods: {
+          reverse(str) {
+            return str.split("").reverse().join("");
+          },
+          changeRawHtml(){
+            this.rawHtml = "謝新達總統好";
+          }
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

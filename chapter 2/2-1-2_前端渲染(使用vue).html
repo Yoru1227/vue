@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/asset/common/vue_3.4.15.runtime.global.prod.min.js"></script>
+    <script src="/asset/common/axios_1.6.5.min.js"></script>
+    <link rel="stylesheet" href="/asset/common/bootstrap_5.3.2.min.css" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <header data-bs-theme="dark">
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container-fluid ms-3">
+            <div class="navbar-brand d-flex align-items-center">nono購物網</div>
+          </div>
+        </div>
+      </header>
+      <div class="row m-2">
+        <div
+          v-for="p in products"
+          :key="p.id"
+          class="card m-1"
+          style="width: 18rem"
+        >
+          <img :src="p.photo_path" class="card-img-top" />
+          <div class="card-body">
+            <p class="card-text text-center">{{p.name}}, {{p.price}}元</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      /*
+      ==================================================
+      【將上一個範例使用vue改寫】
+      ==================================================
+      */
+      // Vue.createApp({
+      //   created() {
+      //     axios.get("/asset/2-1/product.json").then((rs) => {
+      //       this.products = rs.data;
+      //     });
+      //   },
+      //   data() {
+      //     return {
+      //       products: [],
+      //     };
+      //   },
+      // }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【computed實現姓名範例】</h3>
+      <!-- <section>
+        <div>姓：<input type="text" v-model="firstWord" /></div>
+        <div>名：<input type="text" v-model="otherWord" /></div>
+
+        <div>你的姓名為：{{fullName}}</div>
+      </section> -->
+
+      <hr />
+
+      <h3>【watch實現姓名範例】</h3>
+      <section>
+        <div>姓：<input type="text" v-model="firstWord" /></div>
+        <div>名：<input type="text" v-model="otherWord" /></div>
+
+        <div>你的姓名為：{{fullName}}</div>
+      </section>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      window.app = createApp({
+        data() {
+          return {
+            firstWord: "",
+            otherWord: "",
+            fullName: "",
+          };
+        },
+        computed: {
+          // fullName() {
+          //   return this.firstWord + " " + this.otherWord;
+          // },
+        },
+          // watch: {
+          //   firstWord(newVal, oldVal) {
+          //     this.fullName = newVal + " " + this.otherWord;
+          //   },
+          //   otherWord(newVal, oldVal) {
+          //     this.fullName = this.firstWord + " " + newVal;
+          //   },
+          // },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      /*
+      ==================================================
+      【預設匯出(default export)的匯入方式】
+      ==================================================
+      */
+
+      // import obj from "/asset/1-3-1/default_export.js";
+
+      // console.log(obj);
+
+      /*
+      ==================================================
+      【具名匯出(named export)的匯入方式】- 按需匯入
+      ==================================================
+      */
+
+      // import { someone, sayHi, x } from "/asset/1-3-1/named_export.js";
+
+      // console.log(someone, x);
+      // sayHi();
+
+      /*
+      ==================================================
+      【具名匯出(named export)的匯入方式】- 按需匯入並重新命名
+      ==================================================
+      */
+
+      // import {
+      //   someone as p1,
+      //   sayHi as hello,
+      //   x as count,
+      // } from "/asset/1-3-1/named_export.js";
+
+      // console.log(someone);
+      // console.log(p1, count);
+      // hello();
+
+      /*
+      ==================================================
+      【具名匯出(named export)的匯入方式】- 全部匯入
+      ==================================================
+      */
+
+      // import * as myModule from "/asset/1-3-1/named_export.js";
+
+      // console.log(myModule);
+      // myModule.sayHi();
+      // console.log(myModule.someone, myModule.x);
+
+      /*
+      ==================================================
+      【混合使用具名、預設匯出】
+      ==================================================
+      */
+
+      // import p1, { sayHi, x as count } from "/asset/1-3-1/mixed_export.js";
+      // console.log(p1, count);
+      // sayHi();
+
+      /*
+      ==================================================
+      【副作用匯入】side effect
+      ==================================================
+      */
+
+      // import "/asset/1-3-1/side_effect.js";
+
+      /*
+      ==================================================
+      【<script type="module">的作用域是獨立的】
+      ==================================================
+      */
+
+      // const a = 111;
+      // window.b = 222;
+    </script>
+
+    <!-- <script type="module">
+      console.log(a);
+      console.log(window.b);
+    </script> -->
+  </body>
+</html>

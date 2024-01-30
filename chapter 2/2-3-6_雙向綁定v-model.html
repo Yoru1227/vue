@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+
+    <style>
+      .big {
+        zoom: 200%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【基本input】</h3>
+      <section>
+        <input type="text" v-model="name"/>
+        <div>雙向綁定:{{name}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【textarea】</h3>
+      <section>
+        <textarea v-model="text"></textarea>
+        <div>雙向綁定:{{text}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【checkbox】</h3>
+      <section>
+        <input type="checkbox" class="big" v-model="onlyOneCheckbox"/>
+        <div>上面checkbox的值為: {{onlyOneCheckbox}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【checkbox與true-value、false-value】</h3>
+      <section>
+        <input
+          type="checkbox"
+          v-model="checkboxText"
+          class="big"
+          true-value="在學校"
+          false-value="不在學校"
+        />
+        <div>Amy在學校嗎?: {{checkboxText}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【複選的checkbox】</h3>
+      <section>
+        <div>勾選你的興趣: {{checkboxArray}}</div>
+        <ul>
+          <li>
+            <label> <input type="checkbox" value="Travel" v-model="checkboxArray"/> 旅行 </label>
+          </li>
+          <li>
+            <label> <input type="checkbox" value="Arts" v-model="checkboxArray"/> 藝術 </label>
+          </li>
+          <li>
+            <label> <input type="checkbox" value="Sports" v-model="checkboxArray"/> 運動 </label>
+          </li>
+          <li>
+            <label> <input type="checkbox" value="閱讀" v-model="checkboxArray"/> 閱讀 </label>
+          </li>
+          <li>
+            <label> <input type="checkbox" value="H001" v-model="checkboxArray"/> 音樂 </label>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <h3>【radio】</h3>
+      <section>
+        <div>選擇居住地: {{radioAnswer}}</div>
+        <ul>
+          <li>
+            <label><input type="radio" value="Taiwan" v-model="radioAnswer"/>臺灣</label>
+          </li>
+          <li>
+            <label><input type="radio" value="Japan" v-model="radioAnswer"/>日本</label>
+          </li>
+          <li>
+            <label><input type="radio" value="Korea" v-model="radioAnswer"/>韓國</label>
+          </li>
+          <li>
+            <label><input type="radio" value="澳洲" v-model="radioAnswer"/>澳洲</label>
+          </li>
+          <li>
+            <label><input type="radio" value="C001" v-model="radioAnswer"/>美國</label>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <h3>【select】</h3>
+      <section>
+        <div>晚餐吃什麼? {{selectAnswer}}</div>
+        <select v-model="selectAnswer">
+          <option value="hamburger" >漢堡</option>
+          <option value="ramen">拉麵</option>
+          <option value="bento">便當</option>
+          <option value="salad">沙拉</option>
+          <option value="water">水</option>
+        </select>
+      </section>
+
+      <hr />
+
+      <h3>【複選的select】</h3>
+      <section>
+        <div>晚餐吃什麼? {{selectArray}}</div>
+        <select multiple v-model="selectArray">
+          <option value="hamburger">漢堡</option>
+          <option value="ramen">拉麵</option>
+          <option value="bento">便當</option>
+          <option value="salad">沙拉</option>
+          <option value="water">水</option>
+        </select>
+      </section>
+
+      <hr />
+
+      <h3>【修飾符.lazy】</h3>
+      <section>
+        <input type="text" v-model.lazy="lazyText" />
+        <div>延遲: {{lazyText}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【修飾符.number】</h3>
+      <section>
+        <input type="text" v-model.number="theNumber" />
+        <div>蒐集型別: {{typeof theNumber}}</div>
+        <div>只蒐集數字: {{theNumber}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【修飾符.trim】</h3>
+      <section>
+        <input type="text" v-model.trim="trimText" />
+        <div>去除頭尾空白: {{trimText}}</div>
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            name: "Amy",
+            text: "哈囉，Vue!",
+            onlyOneCheckbox: false,
+            checkboxText: "",
+            checkboxArray: [],
+            radioAnswer: "",
+            radioArray: [],
+            selectAnswer: "",
+            selectArray: [],
+            lazyText: "",
+            theNumber: 0,
+            trimText: "",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

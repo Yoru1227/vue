@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+    <style>
+      .school {
+        margin: 10px;
+        padding: 5px;
+        background-color: aquamarine;
+        border: 3px solid black;
+        font-weight: bold;
+      }
+      .student {
+        margin: 10px;
+        padding: 5px;
+        background-color: skyblue;
+        border: 3px solid black;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【非單文件組件】一個html頁面中，有複數個組件</h3>
+      <section>
+        <div class="school">
+          <div>學校:{{school}}</div>
+          <div>地址:{{address}}</div>
+        </div>
+
+        <hr />
+
+        <div class="student">
+          <div>學生姓名:{{name}}</div>
+          <div>學生年齡:{{age}}</div>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      // const app = createApp({
+      //   data() {
+      //     return {
+      //       school: "iSpan",
+      //       address: "台北市大安區復興南路一段390號2樓",
+      //       name: "Amy",
+      //       age: 25,
+      //     };
+      //   },
+      // });
+
+      // app.mount("#app");
+
+      /*
+      ==================================================
+      【全域註冊】
+      ==================================================
+      */
+
+      // const app = createApp({});
+
+      // const school = {
+      // template: `<div class="school">
+      //   <div>學校:{{school}}</div>
+      //   <div>地址:{{address}}</div></div>`,
+      //   data() {
+      //     return {
+      //       school: "iSpan",
+      //       address: "台北市大安區復興南路一段390號2樓",
+      //     };
+      //   },
+      // };
+
+      // const student = {
+      // template: `<div class="student">
+      //   <div>學生姓名:{{name}}</div>
+      //   <div>學生年齡:{{age}}</div></div>`,
+      //   data() {
+      //     return {
+      //       name: "Amy",
+      //       age: 25,
+      //     };
+      //   },
+      // };
+
+      // app.component("school", school).component("student", student);
+      // app.mount("#app");
+
+      /*
+      ==================================================
+      【區域註冊】
+      ==================================================
+      */
+
+      // const school = {
+      // template: `<div class="school">
+      //   <div>學校:{{school}}</div>
+      //   <div>地址:{{address}}</div></div>`,
+      //   data() {
+      //     return {
+      //       school: "iSpan",
+      //       address: "台北市大安區復興南路一段390號2樓",
+      //     };
+      //   },
+      // };
+
+      // const student = {
+      // template: `<div class="student">
+      //   <div>學生姓名:{{name}}</div>
+      //   <div>學生年齡:{{age}}</div></div>`,
+      //   data() {
+      //     return {
+      //       name: "Amy",
+      //       age: 25,
+      //     };
+      //   },
+      // };
+
+      // const app = createApp({
+      //   components: {
+      //     student,
+      //     school,
+      //   },
+      // });
+
+
+      
+      app.mount("#app");
+    </script>
+  </body>
+</html>

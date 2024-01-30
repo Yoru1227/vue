@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>{{message}}</div>
+      <div>count:{{count}}</div>
+    </div>
+
+    <script type="module">
+      /*
+      ==================================================
+      【囉嗦的完整寫法】
+      ==================================================
+      */
+      // import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      // const option = {
+      //   data: function data() {
+      //     const dataObj = { message: "Hello Vue!", count: 1 };
+
+      //     return dataObj;
+      //   },
+      // };
+
+      // const app = createApp(option);
+
+      // app.mount("#app");
+
+      /*
+      ==================================================
+      【改寫方法】
+      ==================================================
+      */
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data(){
+          return {
+            message:"Hello Vue",
+            count: 1
+          };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

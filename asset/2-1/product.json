@@ -1,0 +1,32 @@
+[
+  {
+    "id": "P001",
+    "name": "手機",
+    "price": 20000,
+    "photo_path": "/asset/2-1/phone.jpg"
+  },
+  {
+    "id": "P002",
+    "name": "手錶",
+    "price": 8000,
+    "photo_path": "/asset/2-1/watch.jpg"
+  },
+  {
+    "id": "P003",
+    "name": "電視",
+    "price": 15000,
+    "photo_path": "/asset/2-1/television.jpg"
+  },
+  {
+    "id": "P004",
+    "name": "主機",
+    "price": 40000,
+    "photo_path": "/asset/2-1/computer.jpg"
+  },
+  {
+    "id": "P005",
+    "name": "筆電",
+    "price": 35000,
+    "photo_path": "/asset/2-1/notebook.jpg"
+  }
+]

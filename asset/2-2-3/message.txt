@@ -1,0 +1,4 @@
+<div>This message comes from backend server.</div>
+<div>Hello Vue!</div>
+<div>這條訊息來自於後端伺服器。</div>
+<div>哈囉 Vue!</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div></div>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      /*
+      ==================================================
+      【vue基本結構】
+      ==================================================
+      */
+
+      createApp({
+        data() {
+          return {
+            // data 是一個函數，定義資料
+          };
+        },
+        methods: {
+          // methods 是一個物件，定義方法
+        },
+        created() {
+          // created 是生命週期之一，其他常見的生命週期為：mounted、updated、beforeUnmount
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

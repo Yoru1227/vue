@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【Vue 組件生命週期】</h3>
+      <button @click="isShowChild=!isShowChild">
+        <span v-if="isShowChild">隱藏組件</span>
+        <span v-else>顯示組件</span>
+      </button>
+      <hr />
+      <child v-if="isShowChild"></child>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      const child = {
+        template: `<div>
+              <h4>This is child component</h4>
+              <div><input type="text" v-model="text" /></div>
+              <div>雙向綁定資料：{{text}}</div>
+              </div>`,
+        data() {
+          return {
+            text: "Hello from component!",
+          };
+        },
+        methods: {
+          sayHi() {
+            console.log("Hi!");
+          },
+        },
+        beforeCreate() {
+          console.warn(
+            `beforeCreate! ${this.text}`,
+            "組件建立之初，data、methods尚未建立，此時無法存取this.text。"
+          );
+        },
+        created() {
+          const msg = `created! ${this.text} 在實體創建完成後被立即呼叫。此時已完成data和methods的運算，"watch/event"事件回調已設置，但尚未開始DOM渲染。`;
+          console.warn(msg);
+          alert(msg);
+        },
+        beforeMount() {
+          alert(`beforeMount! ${this.text} 發生在虛擬DOM創建之前，使用率低。`);
+        },
+        mounted() {
+          alert(
+            `mounted! ${this.text} 組件掛載完成，真實DOM已被放到頁面上，可以進行DOM相關的操作(比如取得元素位置)。`
+          );
+          // debugger;
+        },
+        beforeUpdate() {
+          console.warn(
+            `beforeUpdate! ${this.text} 更新之前，此時Vue管理的資料已經更新，但DOM節點還沒更新。`
+          );
+          // debugger;
+        },
+        updated() {
+          console.warn(
+            `updated! ${this.text} 更新完成，此時Vue管理的data、DOM節點都已經更新。`
+          );
+          // debugger;
+        },
+        beforeUnmount() {
+          console.warn(
+            `beforeUnmount! ${this.text} 卸載之前，此時組件內的所有DOM節點還能被存取，通常在此階段進行最後清理。`
+          );
+          // debugger;
+        },
+        unmounted() {
+          console.warn(
+            `unmounted! ${this.text} 卸載完成，此時組件內的DOM節點已經被移除，組件實體已被完全銷毀。`
+          );
+        },
+      };
+
+      const app = createApp({
+        data() {
+          return {
+            isShowChild: false,
+          };
+        },
+      });
+
+      app.component("child", child).mount("#app");
+    </script>
+  </body>
+</html>

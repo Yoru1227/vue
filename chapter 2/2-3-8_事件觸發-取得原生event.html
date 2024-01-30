@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【沒有引數的情況下，第一個參數代表原生event】</h3>
+      <section>
+        <div><input type="text" @input="saySomething" /></div>
+      </section>
+
+      <hr />
+
+      <h3>【有引數的情況下，可使用event關鍵字取得原生evenet】</h3>
+      <section>
+        <div><button @click="sayMyName('Amy')">觸發點擊事件</button></div>
+      </section>
+
+      <hr />
+
+      <h3>【有引數的情況下，也可使用特殊引數$event傳入原生event</h3>
+      <section>
+        <div><button @click="sayHi('Amy')">觸發點擊事件</button></div>
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        methods: {
+          saySomething(a) {
+            console.log("觸發事件");
+            console.log("原生evenet為");
+          },
+          sayMyName(name) {
+            console.log("觸發事件", `My name is ${name}`);
+            console.log("原生evenet為");
+          },
+          sayHi(name, aaa) {
+            console.log("觸發事件", `Hi!${name}!`);
+            console.log("原生evenet為", aaa);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

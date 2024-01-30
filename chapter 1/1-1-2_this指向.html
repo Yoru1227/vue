@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <script>
+      /*
+      ==================================================
+      【在全域下，this 指向 Window 物件】
+      ==================================================
+      */
+
+      // console.log(this);
+
+      /*
+      ==================================================
+      【定義在全域下的函式，this 指向 Window 物件】
+      ==================================================
+      */
+
+      // function myFun() {
+      //   console.log("this", this);
+      // }
+
+      /*
+      ==================================================
+      【定義在物件下的函式，this 指向物件本身】
+      ==================================================
+      */
+
+      // const someone = {
+      //   name: "Amy",
+      //   myFun,
+      //   myFun2() {
+      //     console.log("this", this);
+      //   },
+      // };
+
+      /*
+      ==================================================
+      【原則是看呼叫的function前面有沒有物件，有的話指向物件，否則指向window】
+      ==================================================
+      */
+
+      // const someone = {
+      //   name: "Amy",
+      //   myFun() {
+      //     setTimeout(function () {
+      //       console.log(this);
+      //     });
+      //   },
+      // };
+
+      /*
+      ==================================================
+      【箭頭函式沒有自己的this，它會使用外層的this，故會指向外層作用域(外層函式所屬物件)】
+      ==================================================
+      */
+
+      // const someone = {
+      //   name: "Amy",
+      //   myFun: function myFun() {
+      //     setTimeout(() => {
+      //       console.log(this);
+      //     });
+      //   },
+      // };
+
+      // const someone2 = {
+      //   name: "Bob",
+      //   myFun: () => {
+      //     console.log(this);
+      //   },
+      // };
+    </script>
+  </body>
+</html>

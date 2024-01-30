@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+    <style>
+      .big {
+        zoom: 150%;
+      }
+      .box {
+        border: 1px solid black;
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+
+        background-color: aqua;
+      }
+      .div1 {
+        border: 3px solid black;
+        height: 70px;
+        padding: 20px;
+
+        background-color: chartreuse;
+      }
+      .span2 {
+        border: 3px solid black;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        display: block;
+        background-color: darkgray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【基本寫法與縮寫】</h3>
+      <section>
+        <button class="big" @click="attention">注意!</button>
+        <button class="big" @mouseover="attention">縮寫的注意!</button>
+      </section>
+
+      <hr />
+
+      <h3>【傳入參數】</h3>
+      <section>
+        <button @click="amyGo(true)">Amy來</button>
+        <button @click="amyGo(false)">Amy走</button>
+
+        <h4>Amy {{isAmyHere?'在':'不在'}} 這裡。</h4>
+      </section>
+
+      <hr />
+
+      <h3>【按鍵修飾-別名修飾】</h3>
+      <section>
+        <div>如果只想監聽enter事件</div>
+        <input type="text" @keyup.enter="trigger('key1')" /> {{msg.key1}}
+      </section>
+
+      <hr />
+
+      <h3>【按鍵修飾-系統按鍵】</h3>
+      <div>如果只想監聽shift + enter事件</div>
+      <section>
+        <input type="text" @keyup.shift.enter="trigger('key2')" /> {{msg.key2}}
+      </section>
+
+      <hr />
+
+      <h3>【按鍵修飾-特定鍵】</h3>
+      <div>如果只想監聽按下「a」的事件</div>
+      <section>
+        <input type="text" @keyup="trigger('key3')" /> {{msg.key3}}
+      </section>
+
+      <hr />
+
+      <h3>【滑鼠修飾-滑鼠事件】</h3>
+      <div>如果只想監聽右鍵點擊: {{msg.mouse1}}</div>
+      <section>
+        <div class="box" @mouseup.right="trigger('mouse1')"></div>
+      </section>
+
+      <hr />
+
+      <h3>【事件修飾-阻止預設事件.prevent】最常使用的事件修飾</h3>
+      <section>
+        <form action="#" method="POST">
+          <div>查詢使用者：<input type="text" name="username" /></div>
+          <button type="submit" @click.prevent="submitForm">送出</button>
+        </form>
+      </section>
+
+      <hr />
+
+      <h3>【事件修飾-僅執行一次.once】</h3>
+      <section>
+        <button class="big" @click="attention">注意!</button>
+      </section>
+
+      <hr />
+
+      <h3>【事件修飾-冒泡處理-未加修飾子】</h3>
+      <section>
+        <div class="div1" @click="bubble('div1')">
+          <div class="span2" @click="bubble('span2')">
+            <button class="button3" @click="bubble('button3')">
+              click me!
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <h3>【事件修飾-冒泡處理-阻止冒泡.stop】</h3>
+      <section>
+        <div class="div1" @click="bubble('div1')">
+          <div class="span2" @click="bubble('span2')">
+            <button class="button3" @click.stop="bubble('button3')">
+              click me!
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <h3>【事件修飾-冒泡處理-在捕獲階段執行.capture】</h3>
+      <section>
+        <div class="div1" @click.capture="bubble('div1')">
+          <div class="span2" @click="bubble('span2')">
+            <button class="button3" @click="bubble('button3')">
+              click me!
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <h3>【事件修飾-冒泡處理-只在自己執行.self】</h3>
+      <section>
+        <div class="div1" @click.self="bubble('div1')">
+          <div class="span2" @click.self="bubble('span2')">
+            <button class="button3" @click.self="bubble('button3')">
+              click me!
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            name: "Amy",
+            isAmyHere: false,
+            msg: {
+              key1: "",
+              key2: "",
+              key3: "",
+              mouse1: "",
+            },
+          };
+        },
+        methods: {
+          attention() {
+            alert("感謝你的注意。");
+          },
+          amyGo(b) {
+            this.isAmyHere = b;
+          },
+
+          trigger(e) {
+            const message = `${event.type}事件被觸發了。`;
+            this.msg[e] = message;
+            console.log(message);
+          },
+          submitForm() {
+            console.log("送出表單。");
+          },
+          bubble(name) {
+            console.log(name, "觸發了事件");
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

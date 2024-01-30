@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+
+    <style>
+      .box {
+        border: 1px solid black;
+        width: 80px;
+        height: 80px;
+        transition: all 0.5s;
+        margin: 30px;
+      }
+      .rotate {
+        transform: rotate(45deg);
+      }
+
+      .bg-danger {
+        background-color: lightpink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <button @click="isRotate=!isRotate">切換旋轉</button>
+      <button @click="hasBackgroundColor=!hasBackgroundColor">切換顏色</button>
+      <h3>【基本class綁定】</h3>
+      <section>
+        <div class="box" :class="classArray"></div>
+      </section>
+
+      <hr />
+
+      <h3>
+        【使用物件綁定】此時傳入物件的key值為class名稱，value值為是否要使用
+      </h3>
+      <section>
+        <div
+        class="box"
+        :class="{rotate:isRotate,'bg-danger':hasBackgroundColor}"
+        >
+        </div>
+        <div class="box" :class="classObject"></div>
+      </section>
+
+      <hr />
+
+      <h3>【使用陣列綁定】{{classArray}}</h3>
+      <section>
+        <div :class="classArray"></div>
+        <button @click="addClass('bg-danger')">加入底色</button>
+      </section>
+
+      <hr />
+
+      <h3>【style】此時傳入物件的key值為css樣式名稱，value值為css樣式值</h3>
+      <section>
+        <!-- <div class="box" :style="{'background-color':'lightgreen'}"></div>
+      <div class="box" :style="styleObject"></div> -->
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            isRotate: true,
+            hasBackgroundColor: true,
+            // classObject: {
+            //   rotate: true,
+            //   "bg-danger": true,
+            // },
+            classArray: ["box", "rotate"],
+            styleObject: {
+              "background-color": "lightblue",
+              border: "10px solid black",
+            },
+          };
+        },
+        methods: {
+          addClass(className) {
+            this.classArray.push(className);
+          },
+        },
+        computed:{
+          classObject(){
+            return {rotate:this.isRotate,'bg-danger':this.hasBackgroundColor}
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <script>
+      /*
+      ==================================================
+      【非同步的觀念】
+      ==================================================
+      */
+
+      // function getData() {
+      //   setTimeout(() => {
+      //     console.log("已取得遠端資料...");
+      //   }, 0);
+      // }
+
+      // function init() {
+      //   console.log("初始化動作一...");
+
+      //   getData();
+
+      //   console.log("初始化動作二...");
+      // }
+
+      // init();
+
+      /*
+      ==================================================
+      【callback hell】
+      ==================================================
+      */
+
+      // 輸入一個單字，它會在0~1秒內列印在console
+      // function printWord(word) {
+      //   const time = Math.random() * 1000;
+      //   setTimeout(() => {
+      //     console.log(`${word} in ${(time / 1000).toFixed(2)}s`);
+      //   }, time);
+      // }
+
+      // 逐步執行，會發現無法照順序顯示
+      // function stepByStep() {
+      //   printWord("A");
+      //   printWord("B");
+      //   printWord("C");
+      //   printWord("D");
+      //   printWord("E");
+      // }
+
+      // 改寫方法，接受callback function
+      // function printWord(word, fn) {
+      //   const time = Math.random() * 1000;
+      //   setTimeout(function () {
+      //     console.log(`${word} in ${(time / 1000).toFixed(2)}s`);
+      //     fn();
+      //   }, time);
+      // }
+
+      // 逐步執行，callback hell
+      // function stepByStep() {
+      //   printWord("A", function () {
+      //     printWord("B", function () {
+      //       printWord("C", function () {
+      //         printWord("D", function () {
+      //           printWord("E", function () {});
+      //         });
+      //       });
+      //     });
+      //   });
+      // }
+
+      /*
+      ==================================================
+      【Promise物件基礎】
+      ==================================================
+      */
+
+      // function getResult() {
+      //   return new Promise((resolve, reject) => {
+      //     const num = Math.floor(Math.random() * 100);
+      //     if (num % 2 == 0) {
+      //       resolve(`數字是${num}, 成功了`);
+      //     }
+
+      //     if (num % 2 != 0) {
+      //       reject(`數字是${num}, 失敗了`);
+      //     }
+      //   });
+      // }
+
+      // const p = getResult();
+      // p.then(
+      //   (success) => {
+      //     console.log("進入success,", success);
+      //   },
+      //   (fail) => {
+      //     console.log("進入fail,", fail);
+      //   }
+      // ).catch((error) => {
+      //   console.log("進入catch,", error);
+      // });
+
+      /*
+      ==================================================
+      【使用Promise改寫printWord()】
+      ==================================================
+      */
+
+      // function printWord(word) {
+      //   return new Promise((resolve, reject) => {
+      //     const time = Math.random() * 1000;
+      //     setTimeout(function () {
+      //       console.log(`${word} in ${(time / 1000).toFixed(2)}s`);
+      //       resolve();
+      //     }, time);
+      //   });
+      // }
+
+      // function stepByStep() {
+      //   printWord("A")
+      //     .then(() => printWord("B"))
+      //     .then(() => printWord("C"))
+      //     .then(() => printWord("D"))
+      //     .then(() => printWord("E"));
+      // }
+
+      /*
+      ==================================================
+      【ECMAScript 2017(ES8)加入的 async 與 await 】
+      ==================================================
+      */
+
+      // function printWord(word) {
+      //   return new Promise((resolve, reject) => {
+      //     const time = Math.random() * 1000;
+      //     setTimeout(function () {
+      //       console.log(`${word} in ${(time / 1000).toFixed(2)}s`);
+      //       resolve();
+      //     }, time);
+      //   });
+      // }
+
+      // async function stepByStep() {
+      //   await printWord("A");
+      //   await printWord("B");
+      //   await printWord("C");
+      //   await printWord("D");
+      //   await printWord("E");
+      // }
+    </script>
+  </body>
+</html>

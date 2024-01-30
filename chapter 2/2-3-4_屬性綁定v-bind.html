@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+
+    <style>
+      table,
+      tr,
+      td {
+        text-align: center;
+        border: 1px black solid;
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【v-bind基本用法與縮寫】</h3>
+      <section>
+        <div>店名: {{shop.name}}</div>
+        <div>地址: {{shop.address}}</div>
+        <div>
+          <img
+            :src="shop.photo_path"
+            :title="shop.name"
+            style="width: 200px"
+          />
+        </div>
+      </section>
+
+      <hr />
+
+      <h3>【綁定其他屬性】</h3>
+      <section>
+        <div>
+          <div>
+            店家營業狀態:
+            <span :style="`color:${shop.isOpen?'green':'red'}`">
+              {{shop.isOpen?"營業中":"休息中"}}
+            </span>
+            <button @click="shop.isOpen=!shop.isOpen">切換營業</button>
+          </div>
+          <div>
+            <input type="text" value="我的購物車" />
+            <input type="submit" value="送出訂單" :disabled="!shop.isOpen" />
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <h3>【與v-for結合使用】</h3>
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <td>名稱</td>
+              <td>價格</td>
+              <td>圖片</td>
+              <td>加入購物車</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="p in products">
+              <td>{{p.name}}</td>
+              <td>{{p.price}}</td>
+              <td>
+                <img :src="p.photo_path" style="width: 100px" />
+              </td>
+              <td>
+                <input type="checkbox" :id="p.id" />
+                <label :for="p.id">加入商品</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <h3>【綁定模板字串】</h3>
+      <section>
+        <div>現在的圖片大小為: {{imageSize}} px</div>
+        <input type="range" min="50" max="250" v-model="imageSize" />
+        <img :src="shop.photo_path" :style="`width: ${imageSize}px`" alt="">
+      </section>
+
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            imageSize: 150,
+            shop: {
+              name: "NonoShop",
+              address: "台北市大安區",
+              photo_path: "/asset/2-3-4/nono_shop.jpg",
+              isOpen: true,
+            },
+            products: [
+              {
+                id: "P001",
+                name: "襯衫",
+                price: 2500,
+                photo_path: "/asset/2-3-4/shirt.jpg",
+              },
+              {
+                id: "P002",
+                name: "牛仔褲",
+                price: 1800,
+                photo_path: "/asset/2-3-4/jeans.jpg",
+              },
+              {
+                id: "P003",
+                name: "t-shirt",
+                price: 1000,
+                photo_path: "/asset/2-3-4/t-shirt.jpg",
+              },
+              {
+                id: "P004",
+                name: "外套",
+                price: 4000,
+                photo_path: "/asset/2-3-4/coat.jpg",
+              },
+              {
+                id: "P005",
+                name: "拖鞋",
+                price: 300,
+                photo_path: "/asset/2-3-4/slipper.jpg",
+              },
+            ],
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

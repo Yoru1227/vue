@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>【computed的Getter】</h3>
+      <section>
+        <div>姓：<input type="text" v-model="firstWord" /></div>
+        <div>名：<input type="text" v-model="otherWord" /></div>
+
+        <div>你的姓名為：{{fullName}}</div>
+      </section>
+
+      <hr />
+
+      <h3>【computed的Setter】</h3>
+      <section>
+        <div>請輸入姓名：<input type="text" v-model.lazy="fullName" /></div>
+
+        <div>你的姓為：{{firstWord}}</div>
+        <div>你的名為：{{otherWord}}</div>
+      </section>
+    </div>
+
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return {
+            firstWord: "",
+            otherWord: "",
+          };
+        },
+        computed: {
+          /*
+          ==================================================
+          【基本寫法】直接寫成函數，僅針對取值做計算
+          ==================================================
+          */
+
+          // fullName() {
+          //   return this.firstWord + " " + this.otherWord;
+          // },
+
+          /*
+          ==================================================
+          【完整寫法】寫成物件，可針對取值(get)跟賦值(set)做計算
+          ==================================================
+          */
+
+          fullName: {
+            get() {
+              return this.firstWord + "" + this.otherWord;
+            },
+            set(newValue) {
+              this.firstWord = newValue[0];
+              this.otherWord = newValue[1] + newValue[2];
+            },
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

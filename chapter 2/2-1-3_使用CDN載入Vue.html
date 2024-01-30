@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+
+    <!-- 
+      ==================================================
+      【開始前】vscode請先安裝兩個插件
+      1.Volar : 用於識別之後組件的.vue檔案
+      2.Vue 3 Snippets : 用於提示與自動完成vue3的程式碼
+      ================================================== 
+    -->
+
+    <!-- 
+      ==================================================
+      【第一種載入方式：傳統CDN載入】
+      ================================================== 
+    -->
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.15/vue.global.min.js"
+      integrity="sha512-YX1AhLUs26nJDkqXrSgg6kjMat++etdfsgcphWSPcglBGp/sk5I0/pKuu/XIfOCuzDU4GHcOB1E9LlveutWiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      window.addEventListener("load", () => {
+        Vue.createApp({
+          data() {
+            return { obj: "Vue" };
+          },
+        }).mount("#app");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>Hello, {{ obj }}!</div>
+    </div>
+
+    <script type="module">
+      /*
+      ==================================================
+      【第二種載入方式：ESM模組載入】
+      ==================================================
+      */
+
+      // import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.15/vue.esm-browser.min.js";
+
+      // createApp({
+      //   data() {
+      //     return { obj: "vue" };
+      //   },
+      // }).mount("#app");
+    </script>
+  </body>
+</html>

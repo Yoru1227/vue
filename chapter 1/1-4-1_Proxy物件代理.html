@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+  </head>
+  <body>
+    <script>
+      /*
+      ==================================================
+      【完整的代理寫法】
+      ==================================================
+      */
+      // const someone = { name: "Amy", age: 18 };
+      // const p = new Proxy(someone, {
+      //   get(target, targetProperty) {
+      //     console.log(`有人讀取了p物件的${targetProperty}屬性`);
+      //     return someone[targetProperty];
+      //   },
+      //   set(target, targetProperty, value) {
+      //     console.log(`有人設定了p物件的${targetProperty}屬性`);
+      //     target[targetProperty] = value;
+      //   },
+      //   deleteProperty(target, targetProperty) {
+      //     console.log(`有人刪除了p物件的${targetProperty}屬性`);
+      //     return delete target[targetProperty];
+      //   },
+      // });
+    </script>
+  </body>
+</html>

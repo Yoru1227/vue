@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+
+    <script src="/asset/common/axios_1.6.5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      /*
+      ==================================================
+      【Fetch 結構】
+      ==================================================
+      */
+
+      // fetch(url, {
+      //   body: JSON.stringify(data), // must match 'Content-Type' header
+      //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      //   credentials: "same-origin", // include, same-origin, *omit
+      //   headers: {
+      //     "user-agent": "Mozilla/4.0 MDN Example",
+      //     "content-type": "application/json",
+      //   },
+      //   method: "POST", // *GET, POST, PUT, DELETE, etc.
+      //   mode: "cors", // no-cors, cors, *same-origin
+      //   redirect: "follow", // manual, *follow, error
+      //   referrer: "no-referrer", // *client, no-referrer
+      // })
+      //   .then((rs) => rs.json())
+      //   .then((message) => {
+      //     console.log(message);
+      //   });
+
+      /*
+      1.body: 用於指定請求的主體內容。這個選項只用於 POST, PUT, DELETE 等方法，而不用於 GET 方法。
+      2.cache: 這個選項用於控制暫存的方式。可用選項包括：
+          default: 瀏覽器選擇合適的暫存策略(通常是 no-cache)。
+          no-store: 禁止暫存請求的任何部分。
+          reload: 每次都從網絡下載。
+          no-cache: 總是發送請求到網絡，但如果網絡無效，則使用暫存。
+          force-cache: 使用暫存，如果沒有可用則從網絡下載。
+          only-if-cached: 只使用暫存，即使暫存過期。
+      3.credentials: 用於指定跨域請求時是否應發送 cookies 或 HTTP 認證。選項包括：
+          omit: 從不發送 cookies。
+          same-origin: 只在請求 URL 與呼叫 fetch 的程式是同源時發送cookies。
+          include: 總是發送cookies，即使是跨域請求。
+      4.headers: 設置請求的 HTTP 標頭。這是一個物件，其中的鍵/值對代表標頭的名稱和值。
+      5.method: HTTP 請求方法。常見選項包括 GET, POST, PUT, DELETE 等。
+      6.mode: 用於指定是否允許跨域請求，以及哪種回應是有效的。選項包括：
+          cors: 允許跨域請求。
+          no-cors: 不允許跨域請求。
+          same-origin: 僅允許同源請求。
+      7.redirect: 控制當請求的回應是重新定向時的行為。選項包括：
+          follow: 自動跟隨重新定向。
+          error: 如果回應是重新定向，則產生一個網絡錯誤。
+          manual: 手動處理重新定向。
+      8.referrer: 指定 Referer 標頭的內容。選項包括：
+          no-referrer: 不發送 Referer 標頭。
+          client: 發送請求的頁面的地址。
+      */
+
+      /*
+      ==================================================
+      【Fetch 練習】
+      ==================================================
+      */
+
+      //練習寫點東西
+      // const p = fetch("/asset/2-1/product.json", {})
+      // .then((rs) => rs.json())
+      // .then((obj) => {
+      //   console.log(obj);
+      // });
+
+      // async function getData(){
+      //   const obj = await fetch("/asset/2-1/product.json", {})
+      //   .then((rs) => {
+      //     rs.json()
+      //   });
+      //   console.log(obj);
+      // }
+      // getData();
+
+      /*
+      ==================================================
+      【axios結構】
+      ==================================================
+      */
+
+      // axios
+      //   .post(url, data, {
+      //     headers: {
+      //       "Content-Type": "application/json", // 設置請求內容類型，與 'content-type' 標頭匹配
+      //       "User-Agent": "Mozilla/4.0 MDN Example", // 設置用戶代理
+      //     },
+      //     responseType: "json", // 自動將回應資料轉換為 JSON，對應 fetch 中的 .json()
+      //     withCredentials: true, // 跨域請求時包含認證信息（cookies等），對應 fetch 中的 credentials: 'include'
+      //     // 注意：Axios 沒有直接對應於 fetch 的 'same-origin' 或 'omit' 選項
+      //     // 其他配置選項如 cache, mode, redirect, referrer 在 Axios 中沒有直接對應，
+      //     // 並且通常由瀏覽器預設處理或在特定情況下需要額外處理
+      //   })
+      //   .then((response) => {
+      //     console.log(response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+
+      /*
+      ==================================================
+      【axios練習】
+      ==================================================
+      */
+
+      //練習寫點東西
+
+      // axios("/asset/2-1/product.json")
+      // .then((rs) => {
+      //   return rs.data;
+      // })
+
+      // async function getData(){
+      //   const rs = await axios("/asset/2-1/product.json");
+      //   console.log(rs.data);
+      // }
+    </script>
+  </body>
+</html>

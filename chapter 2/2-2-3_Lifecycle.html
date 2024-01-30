@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.title = decodeURI(location.pathname).slice(1, -5);
+    </script>
+    <script src="/asset/common/axios_1.6.5.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>{{message}}</div>
+    </div>
+    <script type="module">
+      import { createApp } from "/asset/common/vue_3.4.15.esm-browser.min.js";
+
+      createApp({
+        data() {
+          return { message: "" };
+        },
+        /*
+        ==================================================
+        【在生命週期created中發送Ajax請求，取得資料】
+        ==================================================
+        */
+        created() {
+          axios.get("/asset/2-2-3/message.txt").then((rs) => {
+            this.message = rs.data;
+          });
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
